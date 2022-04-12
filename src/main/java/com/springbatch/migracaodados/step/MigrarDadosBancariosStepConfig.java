@@ -17,12 +17,12 @@ public class MigrarDadosBancariosStepConfig {
 	private StepBuilderFactory stepBuilderFactory;
 
 	@Bean
-	public Step migrarPessoaStep(
+	public Step migrarDadosBancariosStep(
 			ItemReader<DadosBancarios> arquivoDadosBancariosReader, 
 			ItemWriter<DadosBancarios> bancoDadosBancariosWriter) {
 		return stepBuilderFactory
 				.get("migrarDadosBancariosStep")
-				.<DadosBancarios, DadosBancarios>chunk(1)
+				.<DadosBancarios, DadosBancarios>chunk(10000)
 				.reader(arquivoDadosBancariosReader)
 				.writer(bancoDadosBancariosWriter)
 				.build();
